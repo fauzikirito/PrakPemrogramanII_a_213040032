@@ -41,6 +41,21 @@ class MyTableModel extends AbstractTableModel {  // Membuat class MyTableModel
         return false; // Mengembalikan nilai false
     }
     
+    public void remove(int row) {
+        // Menghapus elemen dari ArrayList data dengan index row
+        data.remove(row);
+        // Memanggil fungsi fireTableRowsDeleted untuk menghapus nilai dari baris dan
+        // kolom
+        fireTableRowsDeleted(row, row);
+    }
+    
+    public void edit(int row, ArrayList<String> newData) {
+        if (row >= 0 && row < data.size()) {
+            data.set(row, newData); // Mengubah data pada baris yang dipilih dengan data baru
+            fireTableRowsUpdated(row, row); // Memperbarui tabel setelah pengubahan data
+        }
+    }
+    
     public void add(ArrayList<String> value) { // Method untuk menambah nilai ke table
         data.add(value);  // Menambahkan input user ke ArrayList data
         fireTableRowsInserted(data.size() -1, data.size() -1); // Menambahkan elemen-elemen ArrayList data ke table
